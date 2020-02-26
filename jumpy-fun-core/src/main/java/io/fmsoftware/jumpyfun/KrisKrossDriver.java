@@ -1,23 +1,29 @@
 package io.fmsoftware.jumpyfun;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class KrisKrossDriver
 {
+    private static final Logger logger = LogManager.getLogger(KrisKrossDriver.class);
+
     public static void main( String[] args )
     {
-        KrisKross driver = new KrisKross();
+        logger.debug("Inside driver main");
+        KrisKross jumpyLib = new KrisKross();
         String json = "{ \"action\": \"jump\", \"time\": 100 }";
         try {
-            System.out.println("Starting driver");
-            System.out.println("Json passed: "+json);
+            logger.debug("Starting driver");
+            logger.debug("Json passed in: "+json);
 
-            driver.addAction(json);
+
+            jumpyLib.addAction(json);
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            logger.error("{}", ex);
         }
         finally {
-            System.out.println("Driver Done.");
+            logger.debug("Driver Done.\n");
         }
     }
 }
