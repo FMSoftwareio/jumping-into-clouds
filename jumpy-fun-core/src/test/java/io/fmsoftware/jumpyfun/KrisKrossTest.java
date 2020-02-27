@@ -13,4 +13,9 @@ public class KrisKrossTest
     {
         assertTrue( true );
     }
+
+    //        Assert.assertTrue(jsonObj.isJsonObject());
+//        Assert.assertEquals("jump", jsonObj.get("action").getAsString());
+//        Assert.assertEquals(jsonObj.get("time").getAsInt(), 100);
+
 }
