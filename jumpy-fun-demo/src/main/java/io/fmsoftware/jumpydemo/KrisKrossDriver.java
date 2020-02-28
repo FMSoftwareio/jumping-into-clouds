@@ -1,5 +1,6 @@
-package io.fmsoftware.jumpyfun;
+package io.fmsoftware.jumpydemo;
 
+import io.fmsoftware.jumpyfun.KrisKross;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,8 +22,8 @@ public class KrisKrossDriver
 
         ThreadedKrisKross t1 = new ThreadedKrisKross("{ \"action\": \"jump\", \"time\": 100 }", jumpyLib, 1);
         ThreadedKrisKross t2 = new ThreadedKrisKross("{ \"action\": \"run\", \"time\": 75 }", jumpyLib, 2);
-        ThreadedKrisKross t3 = new ThreadedKrisKross("{ \"action\": \"swim\", \"time\": -1 }", jumpyLib, 3);
-        ThreadedKrisKross t4 = new ThreadedKrisKross("{ \"action\": \"jump\", \"time\":  }", jumpyLib, 4);
+        ThreadedKrisKross t3 = new ThreadedKrisKross("{ \"action\": \"swim\", \"time\": 732 }", jumpyLib, 3);
+        ThreadedKrisKross t4 = new ThreadedKrisKross("{ \"action\": \"jump\", \"time\": 121 }", jumpyLib, 4);
         ThreadedKrisKross t5 = new ThreadedKrisKross("{ \"action\": \"jump\", \"time\": 200 }", jumpyLib, 5);
         ThreadedKrisKross t6 = new ThreadedKrisKross("{ \"action\": \"swim\", \"time\": 543 }", jumpyLib, 6);
         ThreadedKrisKross t7 = new ThreadedKrisKross("{ \"action\": \"jump\", \"time\": 200 }", jumpyLib, 7);
