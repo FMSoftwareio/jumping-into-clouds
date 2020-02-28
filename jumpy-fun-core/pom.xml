@@ -7,14 +7,14 @@
   <parent>
     <artifactId>jumpy-fun-parent</artifactId>
     <groupId>io.fmsoftware</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.fmsoftware</groupId>
   <artifactId>jumpy-fun-core</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>jar</packaging>
 
   <dependencies>
