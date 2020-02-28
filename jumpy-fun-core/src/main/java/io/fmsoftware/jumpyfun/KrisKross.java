@@ -49,6 +49,7 @@ public class KrisKross {
         }
         else {
             logger.error("There is an error with the json data: "+json);
+            throw new Exception("There is an error with the json data: "+json);
         }
         logger.debug("addAction Done.");
     }
@@ -86,6 +87,9 @@ public class KrisKross {
 
             if (element.isJsonNull()) {
                 logger.error("Action value cannot be null.");
+            }
+            else if (element.getAsString().contentEquals("")) {
+                logger.error("Action value cannot be empty.");
             }
             else {
                 //This will convert any action element that is a number into a string.
