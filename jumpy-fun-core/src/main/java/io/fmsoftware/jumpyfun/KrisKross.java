@@ -8,12 +8,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class KrisKross {
-    private static class KrisKrossAvgStats {
+    private class KrisKrossAvgStats {
         String action;
         int avg;
     }
 
-    private static class KrisKrossActionStats {
+    private class KrisKrossActionStats {
         int totalTime;
         int count;
     }
@@ -23,14 +23,21 @@ public class KrisKross {
     private final String actionElementName = "action";
     private final String timeElementName = "time";
 
-    public void addAction(String json) throws Exception {
+    public synchronized void addAction(String json) throws Exception {
+        JsonObject jsonObj;
+        String action = null;
+        Integer time = null;
         logger.debug("Inside: addAction");
-        JsonObject jsonObj = new Gson().fromJson(json, JsonObject.class);
-        String action = parseActionElement(jsonObj);
-        Integer time = parseTimeElement(jsonObj);
+        try {
+            jsonObj = new Gson().fromJson(json, JsonObject.class);
+            action = parseActionElement(jsonObj);
+            time = parseTimeElement(jsonObj);
+        }
+        catch (com.google.gson.JsonSyntaxException ex) {
+            logger.fatal("{}", ex);
+        }
 
         if ((action != null) && (time != null)) {
-            // Needs semaphore
             boolean hasAction = actions.containsKey((action));
 
             if (hasAction) {
@@ -40,13 +47,15 @@ public class KrisKross {
                 addNewAction(action, time);
             }
         }
+        else {
+            logger.error("There is an error with the json data: "+json);
+        }
         logger.debug("addAction Done.");
     }
 
-    public String getStats() throws Exception {
+    public synchronized String getStats() throws Exception {
         logger.debug("Inside: getStats");
         Gson gson = new Gson();
-        // Needs semaphore
         ArrayList<KrisKrossAvgStats> avgs = new ArrayList<>();
 
         for (Map.Entry<String, KrisKrossActionStats> entry : actions.entrySet()) {
@@ -60,8 +69,13 @@ public class KrisKross {
             avgs.add(jsonStats);
         }
 
-        logger.debug(gson.toJson(avgs));
-        return gson.toJson(avgs);
+        String json = gson.toJson(avgs);
+        logger.debug(json);
+        return json;
+    }
+
+    public synchronized void resetStats() {
+        this.actions = new HashMap<>();
     }
 
     private String parseActionElement(JsonObject jsonObj) {
@@ -92,7 +106,10 @@ public class KrisKross {
             } else {
                 //This will truncate any value that is not a whole number.
                 try {
-                    return element.getAsInt();
+                    int value = element.getAsInt();
+                    if (value > 0) {
+                        return value;
+                    }
                 }
                 catch (java.lang.NumberFormatException ex) {
                     logger.error("Time value must be an integer.", ex);
@@ -102,17 +119,16 @@ public class KrisKross {
         return null;
     }
 
-    private void addNewAction(String action, Integer time) {
+    private synchronized void addNewAction(String action, Integer time) {
         KrisKrossActionStats item = new KrisKrossActionStats();
         item.count = 1;
         item.totalTime = time;
 
-        // Needs a semaphore
-        actions.put(action,item);
+        actions.put(action, item);
     }
 
-    private void updateAction(String action, Integer time) {
-        // Needs a semaphore
+    private synchronized void updateAction(String action, Integer time) {
+        //NOTE: This is a reference.
         KrisKrossActionStats item = actions.get(action);
 
         item.totalTime += time;
