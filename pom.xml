@@ -45,6 +45,7 @@
 
 	<modules>
         <module>jumpy-fun-core</module>
+        <module>jumpy-fun-demo</module>
     </modules>
 	
 </project>
