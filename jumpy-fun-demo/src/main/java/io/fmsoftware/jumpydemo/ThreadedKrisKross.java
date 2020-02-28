@@ -1,5 +1,6 @@
-package io.fmsoftware.jumpyfun;
+package io.fmsoftware.jumpydemo;
 
+import io.fmsoftware.jumpyfun.KrisKross;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
