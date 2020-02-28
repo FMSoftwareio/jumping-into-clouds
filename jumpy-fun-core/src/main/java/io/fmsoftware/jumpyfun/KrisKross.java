@@ -104,7 +104,7 @@ public class KrisKross {
             if (element.isJsonNull()) {
                 logger.error("Time value cannot be null.");
             } else {
-                //This will truncate any value that is not a whole number.
+                //This will truncate the remainder for any value that is not a whole number.
                 try {
                     int value = element.getAsInt();
                     if (value > 0) {
