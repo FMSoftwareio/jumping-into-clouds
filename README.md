@@ -45,6 +45,8 @@ public class YourApplicationNameHere
     // The rest of your code.
 }
 ```
+* Refer to included jumpy-fun-demo for a full demo of how to call and structure the JSON as well as get statistics from the
+api library.
 
 * Logging
     * There is a logging facility included to help debug any errors encountered with the api library. The log file is created
