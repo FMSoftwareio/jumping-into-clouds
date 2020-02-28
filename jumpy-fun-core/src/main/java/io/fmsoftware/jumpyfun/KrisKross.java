@@ -23,6 +23,13 @@ public class KrisKross {
     private final String actionElementName = "action";
     private final String timeElementName = "time";
 
+    /**
+     * The method takes a JSON string in the format:
+     * String json = "{ \"action\": \"jump\", \"time\": 100 }";
+     *
+     * The action name may be any valid java string identifier.
+     * The time value must be an integer greater than zero.
+     */
     public synchronized void addAction(String json) throws Exception {
         JsonObject jsonObj;
         String action = null;
@@ -54,6 +61,15 @@ public class KrisKross {
         logger.debug("addAction Done.");
     }
 
+    /**
+     * The method returns a serialized JSON array of the average time for each action name in the format:
+     * [
+     *   {"action":"ski","avg":543},
+     *   {"action":"run","avg":309},
+     *   {"action":"swim","avg":732},
+     *   {"action":"jump","avg":180}
+     * ]
+     */
     public synchronized String getStats() throws Exception {
         logger.debug("Inside: getStats");
         Gson gson = new Gson();
@@ -75,6 +91,9 @@ public class KrisKross {
         return json;
     }
 
+    /**
+     * This methods resets the stats to an empty state.
+     */
     public synchronized void resetStats() {
         this.actions = new HashMap<>();
     }
