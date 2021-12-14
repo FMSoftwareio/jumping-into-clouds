@@ -16,7 +16,7 @@
         <java.version>13</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <log4j.version>2.13.0</log4j.version>
+        <log4j.version>2.16.0</log4j.version>
     </properties>
 
     <dependencies>
